@@ -35,7 +35,7 @@ console.info('Server listening on 3000');
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
-const wsServer = new WebSocket.Server({ port: 3001 }); // websocket server
+const wsServer = new WebSocket.Server({ server: server }); // websocket server
 
 wsServer.on('connection', async (ws, req) => {
     console.log('new connection', ws._socket.remoteAddress);

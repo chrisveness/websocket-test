@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>WebSocket Test</title>
     <script type="module">
-        const socket = new WebSocket('ws://localhost:3001');
+        const socket = new WebSocket('ws://localhost:3000');
 
         socket.addEventListener('open', function(event) {
             console.log('open connection @', new Date().toISOString().split('T')[1])
