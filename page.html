@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>WebSocket Test</title>
+    <script type="module">
+        const socket = new WebSocket('ws://localhost:3001');
+
+        socket.addEventListener('open', function(event) {
+            console.log('open connection @', new Date().toISOString().split('T')[1])
+            socket.send(`Connection from ${location.host} @ ${new Date().toISOString().split('T')[1]}`);
+        });
+
+        socket.onmessage = function(event) {
+            const message = event.data;
+            console.log('msg recd', message)
+
+            if (message == 'refresh') {
+                socket.close();
+                location.reload();
+            } else {
+                const divWs = document.querySelector('#websocket-message');
+                divWs.textContent = event.data;
+            }
+        };
+
+        socket.onclose = function() { // server restarted?
+            location.reload();
+        }
+    </script>
+</head>
+<body>
+
+<h1>WebSocket Test</h1>
+
+<p>Last page refresh: {{timestamp}}.</p>
+
+<div id="websocket-message"></div>
+
+</body>
+</html>
